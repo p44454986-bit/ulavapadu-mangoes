@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="te">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#176b3a">
+<meta name="description" content="Ulavapadu Mangoes - తాజా మామిడికాయలు ఆర్డర్ చేయండి">
+<link rel="manifest" href="manifest.webmanifest">
+<title>Ulavapadu Mangoes</title>
+<style>
+:root{--green:#176b3a;--deep:#0e4d29;--gold:#ffbf36;--cream:#fffaf0;--ink:#18231b}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Noto Sans Telugu",sans-serif;background:var(--cream);color:var(--ink)}
+header{background:linear-gradient(135deg,var(--deep),#23864a);color:white;padding:24px 18px 28px;border-radius:0 0 24px 24px}
+.top{display:flex;align-items:center;gap:12px}.logo{font-size:38px;background:#ffffff20;border-radius:16px;padding:8px}
+h1{font-size:24px;margin:0}header p{margin:8px 0 0;opacity:.92}
+.wrap{max-width:760px;margin:auto;padding:16px}.toolbar{display:flex;gap:10px;align-items:center;justify-content:space-between;margin:4px 0 16px}
+select,input,textarea{font:inherit;border:1px solid #d4ddcf;border-radius:10px;padding:11px;background:white;width:100%}
+.toolbar select{width:auto;max-width:145px}.section-title{font-size:20px;margin:18px 0 10px}
+.products{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.card{background:white;border:1px solid #e7eadf;border-radius:16px;padding:14px;box-shadow:0 3px 12px #173a1610}
+.fruit{font-size:40px;background:#fff5cf;border-radius:12px;text-align:center;padding:10px;margin-bottom:10px}
+.card h3{margin:0 0 5px;font-size:17px}.muted{color:#617063;font-size:13px}.price{font-weight:800;color:var(--green);margin:8px 0}
+button{font:inherit;border:0;border-radius:11px;padding:12px 14px;background:var(--green);color:white;font-weight:700;cursor:pointer}
+button.secondary{background:#e9f3e9;color:var(--deep)}button:active{transform:scale(.99)}
+.card button{width:100%}.formbox{background:white;border:1px solid #e7eadf;border-radius:16px;padding:16px;margin-top:18px}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:10px}.fields .full{grid-column:1/-1}
+label{display:block;font-size:13px;font-weight:700;margin-bottom:5px}.qty{display:flex;align-items:center;gap:8px;margin:9px 0}.qty button{padding:4px 12px}
+.cartline{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid #edf0e8}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}.actions button{flex:1}
+.notice{font-size:12px;color:#647064;line-height:1.5;margin-top:12px}
+footer{text-align:center;padding:22px;color:#657165;font-size:12px}
+@media(max-width:430px){.products{grid-template-columns:1fr 1fr}.card{padding:10px}.card h3{font-size:15px}.fields{grid-template-columns:1fr}.fields .full{grid-column:auto}}
+</style>
+</head>
+<body>
+<header><div class="top"><div class="logo">🥭</div><div><h1>Ulavapadu Mangoes</h1><div id="tagline">తాజా మామిడికాయలు • నేరుగా ఆర్డర్ చేయండి</div></div></div><p id="subhead">Fresh mangoes from Ulavapadu — Order via WhatsApp</p></header>
+<main class="wrap">
+<div class="toolbar"><strong id="chooseLabel">మామిడికాయలు ఎంచుకోండి</strong><select id="lang" aria-label="Language"><option value="te">తెలుగు</option><option value="en">English</option></select></div>
+<div class="products" id="products"></div>
+<section class="formbox">
+<h2 class="section-title" id="orderTitle">మీ ఆర్డర్</h2>
+<div id="cart"><p class="muted" id="emptyCart">ఇంకా ఏ వస్తువూ ఎంచుకోలేదు.</p></div>
+<div class="fields" style="margin-top:14px">
+<div><label id="nameLabel" for="customer">పేరు / Name *</label><input id="customer" autocomplete="name" placeholder="మీ పేరు"></div>
+<div><label id="phoneLabel" for="phone">ఫోన్ / Phone *</label><input id="phone" type="tel" autocomplete="tel" placeholder="10-digit mobile"></div>
+<div class="full"><label id="addressLabel" for="address">డెలివరీ అడ్రస్ / Delivery address *</label><textarea id="address" rows="2" placeholder="గ్రామం, పట్టణం, PIN code"></textarea></div>
+<div><label id="deliveryLabel" for="delivery">డెలివరీ ప్రాంతం / City</label><input id="delivery" placeholder="ఉదా: Guntur"></div>
+<div><label id="notesLabel" for="notes">గమనిక / Notes</label><input id="notes" placeholder="ఏదైనా ప్రత్యేక వివరాలు"></div>
+</div>
+<div class="actions"><button id="whatsappBtn">WhatsApp ద్వారా ఆర్డర్</button><button class="secondary" id="copyBtn">ఆర్డర్ కాపీ</button></div>
+<p class="notice" id="notice">గమనిక: ధరలు ఇంకా నిర్ధారించలేదు. నిజమైన ధరలు, స్టాక్, డెలివరీ ఛార్జీలు యజమాని నిర్ధారించాలి. WhatsApp ఆర్డర్ పంపడానికి ఇంటర్నెట్ అవసరం.</p>
+</section>
+</main>
+<footer>© Ulavapadu Mangoes • Freshness from Ulavapadu 🥭</footer>
+<script>
+const WHATSAPP_NUMBER = "918019475596"; // Replace with business WhatsApp number, country code included, no + or spaces.
+const items = [
+ {id:"banganapalli",te:"బంగినపల్లి ప్రీమియం",en:"Banganapalli Premium",descTe:"పెద్దవి, తియ్యని మామిడికాయలు",descEn:"Large, sweet mangoes"},
+ {id:"rasalu",te:"రసాలు",en:"Rasalu",descTe:"రసంతో నిండిన రకం",descEn:"Juicy mango variety"},
+ {id:"kobbari",te:"కొబ్బరి మామిడి",en:"Kobbari Mango",descTe:"ప్రత్యేకమైన స్థానిక రకం",descEn:"Distinct local variety"},
+ {id:"suvarnarekha",te:"సువర్ణరేఖ",en:"Suvarna Rekha",descTe:"రుచికరమైన సీజనల్ రకం",descEn:"Tasty seasonal variety"}
+];
+const sizes=[3,5,10]; const cart={}; let lang="te";
+const money = n => "₹"+Number(n).toLocaleString("en-IN");
+function t(te,en){return lang==="te"?te:en}
+function renderProducts(){
+ document.getElementById("products").innerHTML=items.map(it=>`
+ <article class="card"><div class="fruit">🥭</div><h3>${t(it.te,it.en)}</h3><div class="muted">${t(it.descTe,it.descEn)}</div>
+ <div style="margin-top:10px"><label>${t("బాక్స్ పరిమాణం","Box size")}</label><select id="size-${it.id}">${sizes.map(s=>`<option value="${s}">${s} kg</option>`).join("")}</select></div>
+ <div style="margin-top:9px"><label>${t("ధర (₹) — యజమాని నింపాలి","Price (₹) — set by owner")}</label><input type="number" min="0" id="price-${it.id}" placeholder="${t("ఉదా: 500","e.g. 500")}"></div>
+ <div class="qty"><button class="secondary" onclick="changeQty('${it.id}',-1)">−</button><strong id="qty-${it.id}">${cart[it.id]?.qty||0}</strong><button onclick="changeQty('${it.id}',1)">+</button></div>
+ <button onclick="addItem('${it.id}')">${t("ఆర్డర్‌లో చేర్చు","Add to order")}</button></article>`).join("");
+}
+function changeQty(id,d){if(!cart[id])cart[id]={qty:0,size:3,price:0};cart[id].qty=Math.max(0,cart[id].qty+d);document.getElementById("qty-"+id).textContent=cart[id].qty;renderCart()}
+function addItem(id){const size=Number(document.getElementById("size-"+id).value);const price=Number(document.getElementById("price-"+id).value);if(!price||price<1){alert(t("దయచేసి బాక్స్ ధర నమోదు చేయండి. ధర యజమాని నిర్ధారించాలి.","Please enter the box price. The owner must confirm pricing."));return}cart[id]={qty:Math.max(1,cart[id]?.qty||0),size,price};document.getElementById("qty-"+id).textContent=cart[id].qty;renderCart();document.getElementById("orderTitle").scrollIntoView({behavior:"smooth",block:"start"})}
+function renderCart(){const selected=items.filter(it=>cart[it.id]?.qty>0);const target=document.getElementById("cart");if(!selected.length){target.innerHTML=`<p class="muted" id="emptyCart">${t("ఇంకా ఏ వస్తువూ ఎంచుకోలేదు.","No items selected yet.")}</p>`;return}
+target.innerHTML=selected.map(it=>{const c=cart[it.id];return `<div class="cartline"><span>${t(it.te,it.en)} (${c.size} kg × ${c.qty})</span><strong>${money(c.price*c.qty)}</strong></div>`}).join("")+`<div class="cartline"><strong>${t("మొత్తం (డెలివరీ ఛార్జీలు అదనం కావచ్చు)","Subtotal (delivery may be extra)")}</strong><strong>${money(selected.reduce((s,it)=>s+cart[it.id].price*cart[it.id].qty,0))}</strong></div>`}
+function orderText(){const selected=items.filter(it=>cart[it.id]?.qty>0);if(!selected.length){alert(t("ముందుగా ఒక మామిడి బాక్స్ ఎంచుకోండి.","Please select at least one mango box first."));return null}
+const name=document.getElementById("customer").value.trim(),phone=document.getElementById("phone").value.trim(),address=document.getElementById("address").value.trim();if(!name||!phone||!address){alert(t("పేరు, ఫోన్, అడ్రస్ తప్పనిసరి.","Name, phone, and address are required."));return null}
+const lines=selected.map(it=>{const c=cart[it.id];return `• ${t(it.te,it.en)} — ${c.size} kg × ${c.qty} = ${money(c.price*c.qty)}`});
+const total=selected.reduce((s,it)=>s+cart[it.id].price*cart[it.id].qty,0);
+return `🥭 Ulavapadu Mangoes Order\nName: ${name}\nPhone: ${phone}\nAddress: ${address}\nCity/Area: ${document.getElementById("delivery").value.trim()||"-"}\n\n${lines.join("\n")}\nSubtotal: ${money(total)}\nNotes: ${document.getElementById("notes").value.trim()||"-"}\n\nPlease confirm stock, final price, delivery charge, and payment method.`;
+}
+document.getElementById("whatsappBtn").onclick=()=>{const text=orderText();if(!text)return;if(WHATSAPP_NUMBER.includes("X")){alert(t("యాప్ తయారీదారు: ముందుగా కోడ్‌లో మీ WhatsApp నంబర్ పెట్టాలి. ఇప్పుడే ఆర్డర్ కాపీ చేయవచ్చు.","Setup needed: replace the placeholder WhatsApp number in the code. You can copy the order for now."));navigator.clipboard?.writeText(text);return}window.open("https://wa.me/"+WHATSAPP_NUMBER+"?text="+encodeURIComponent(text),"_blank")};
+document.getElementById("copyBtn").onclick=async()=>{const text=orderText();if(!text)return;try{await navigator.clipboard.writeText(text);alert(t("ఆర్డర్ కాపీ అయింది.","Order copied."))}catch(e){prompt(t("ఆర్డర్‌ను కాపీ చేయండి","Copy your order"),text)}};
+const translations={
+ tagline:["తాజా మామిడికాయలు • నేరుగా ఆర్డర్ చేయండి","Fresh mangoes • Order directly"],
+ subhead:["ఉలవపాడు నుంచి తాజా మామిడికాయలు — WhatsApp ద్వారా ఆర్డర్ చేయండి","Fresh mangoes from Ulavapadu — Order via WhatsApp"],
+ chooseLabel:["మామిడికాయలు ఎంచుకోండి","Choose your mangoes"],orderTitle:["మీ ఆర్డర్","Your order"],nameLabel:["పేరు / Name *","Name *"],phoneLabel:["ఫోన్ / Phone *","Phone *"],addressLabel:["డెలివరీ అడ్రస్ / Delivery address *","Delivery address *"],deliveryLabel:["డెలివరీ ప్రాంతం / City","Delivery area / City"],notesLabel:["గమనిక / Notes","Notes"],whatsappBtn:["WhatsApp ద్వారా ఆర్డర్","Order via WhatsApp"],copyBtn:["ఆర్డర్ కాపీ","Copy order"],notice:["గమనిక: ధరలు ఇంకా నిర్ధారించలేదు. నిజమైన ధరలు, స్టాక్, డెలివరీ ఛార్జీలు యజమాని నిర్ధారించాలి. WhatsApp ఆర్డర్ పంపడానికి ఇంటర్నెట్ అవసరం.","Note: Prices are placeholders to be set by the owner. Confirm stock, final prices, and delivery charges. Internet is needed to send a WhatsApp order."]
+};
+function setLanguage(){document.documentElement.lang=lang;Object.entries(translations).forEach(([id,v])=>{const el=document.getElementById(id);if(el)el.textContent=v[lang==="te"?0:1]});document.getElementById("customer").placeholder=t("మీ పేరు","Your name");document.getElementById("address").placeholder=t("గ్రామం, పట్టణం, PIN code","Village, town, PIN code");document.getElementById("delivery").placeholder=t("ఉదా: Guntur","e.g. Guntur");document.getElementById("notes").placeholder=t("ఏదైనా ప్రత్యేక వివరాలు","Any special instructions");renderProducts();renderCart()}
+document.getElementById("lang").onchange=e=>{lang=e.target.value;setLanguage()};
+renderProducts();
+if("serviceWorker" in navigator && location.protocol.startsWith("http")) navigator.serviceWorker.register("./service-worker.js").catch(()=>{});
+</script>
+</body>
+</html>
